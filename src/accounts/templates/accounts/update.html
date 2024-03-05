@@ -11,10 +11,33 @@
             <div class="form-group">
                 {{ form.as_p }}
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </form>
+        <form method="POST" action="{% url 'accounts:delete' %}">{% csrf_token %}
+            <button type="submit" class="btn btn-danger my-2">Удалить</button>
         </form>
     </div>
 </div>
 
-
+<div class="row my-4">
+    <div class="col-md-6 mx-auto">
+        <p class="my-2">Если вы не нашли подходящих для Вас конфигураций, вы можете написать нам свои пожелания. <br>
+        После того как необходимые данные будут добавлены, Вам придет письмо об этом на указанный email.</p>
+        <p class="d-inline-flex gap-1">
+            <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapsed" aria-expanded="false" aria-controls="collapseExample">
+            Показать форму
+            </button>
+        </p>
+        <div class="collapse" id="collapsed">
+            <div class="card card-body">
+                <form method="POST" action="{% url 'accounts:contact' %}">{% csrf_token %}
+                    <div class="form-group">
+                        {{ contact_form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

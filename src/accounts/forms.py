@@ -57,3 +57,15 @@ class UserUpdateForm(forms.Form):
         model = User
         fields = ('city', 'language', 'is_send_email')
 
+
+class ContactForm(forms.Form):
+    city = forms.CharField(required=True,
+                           widget=forms.TextInput(attrs={'class': 'form-control'}),
+                           label='Город')
+    language = forms.CharField(required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}),
+                               label='Специальность')
+    email = forms.EmailField(required=True,
+                             widget=forms.EmailInput(attrs={'class': 'form-control'}),
+                             label='Введите email')
+

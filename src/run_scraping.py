@@ -1,6 +1,7 @@
 # import codecs
 import asyncio
 import os, sys
+import datetime
 
 proj = os.path.dirname(os.path.abspath('manage.py'))
 sys.path.append(proj)
@@ -76,7 +77,13 @@ for job in jobs:
         pass
 
 if errors:
-    er = Error(data=errors).save()
+    qs = Error.objects.filter(timestamp=datetime.date.today())
+    if qs.exists():
+        err = qs.first()
+        err.data.update({'errors': errors})
+        err.save()
+    else:
+        er = Error(data=f'errors:{errors}').save()
 
 # h = codecs.open('work.json', 'w', 'utf-8')
 # h.write(str(jobs))
